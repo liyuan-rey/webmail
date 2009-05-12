@@ -1,0 +1,277 @@
+;############################
+; Language file for Webmail (http://www.iisworks.com)
+; Add a ";" to comment (part of) a line.
+; 03/07 Swedish - Contributed by preppen
+;############################
+
+;### Language specific system settings
+0=ISO-8859-1 ;Charset for this language
+1=1053 ;LCID
+192=Inbox, Raderade, Skickade, Utkast ;### Built-in folder names. Do not change order!
+196=År, Månader, Veckor, Dagar, Timmar, Minuter ;### Names for timeperiods
+
+;### Login page
+2=Användare
+3=Lösenord
+4=Spara användarnamn
+5=Logga in
+6=Registrera
+7=Skicka lösenord
+8=Språk
+9=Spara mitt användarnamn i en cookie på datorn
+10=Ojiltigt användarnamn eller lösenord!
+
+;### Listing
+11=Från
+12=Ämne
+13=Datum
+14=Ålder
+15=Storlek
+16=Till
+17=Nya meddelanden
+18=Avsändare
+19=Sänt den
+20=Senast läst
+21=Hämtat den
+22=Hämtat från IP
+23=CC mottagare
+24=Hög prioritet
+25=Låg prioritet
+26=Meddelanden
+27=hittades
+28=Oläst
+29=Första sidan
+30=Föregående sida
+31=Nästa sida
+32=Senaste sidan
+33=Månadsvis bandbredd begränsning har överstigits! Sändande och mottagande är avstängd.
+34=Skriv ny Epost
+35=Flytta valda meddelanden
+36=Är du säker på att du vill radera alla markerade meddelanden?
+37=Radera valt meddelande
+38=Sök text i ett meddelande i den här katalogen
+39=Ångra sökningen
+40=Markera valda meddelanden som Lästa
+41=Markera valda meddelanden som Olästa
+42=Skicka valda meddelanden som bifogade filer i epost
+43=Växla till Automatisk förhandsvisning
+44=Visa mina länkar
+45=Gör en notering
+46=Välj katalog att visa
+47=Inställningar användarkonto
+48=Hantera WebMail användare och grupper
+49=Webmail konto och brevlåde info
+50=Logga ut från Webmail
+51=Gå till hemsida
+52=Kontrollera ny epost
+53=(Av)markera alla meddelanden på den här sidan
+54=Visa senaste POP loggfil
+
+;### View message
+55=Stäng fönster
+56=Tillbaka till meddelanden
+57=Svara på det här meddelandet
+58=Svara alla mottagare i det här meddelandet
+59=Vidarebefordra meddelandet
+60=Skrivut meddelandet
+61=Visa källa
+62=Öppna i popup fönster
+63=CC
+64=BCC
+65=Externa länkar i det här meddelandet blockerades!
+66=Inbäddade bilder kan ge spammers bekräftelse att din epost adress är aktivt.\nLitar du på denna avsändare, och vill du öppna meddelandet?
+67=meddelanden kunde inte hämtas därför brevlådans storleks begränsning var överskriden! Vänligen ta bort några meddelanden och prova igen.
+68=Nya meddelanden hämtade
+69=Senaste kontroll 
+70=(inga nya meddelanden)
+
+;### Context menu
+71=Nytt meddelande
+72=Kontrollera epost
+73=Flytta till
+74=Radera
+75=Radera från WebMail
+76=Markera som läst
+77=Markera som oläst
+78=Är du säker du vill ta bort valda meddelanden från både WebMail och POP server?
+79=Radera från server
+80=Är du säker du vill ta bort alla bifogade filer från valdt meddelanden?
+81=Ta bort bifogade filer från valda meddelanden för att spara diskutrymme
+82=Radera bifogade filer
+83=Uppdatera
+84=Helskärm
+85=Brevlåde info
+86=Lägg till i adressbok
+
+87=Flytta till katalog
+88=Ångra
+89=Flytta
+90=Skriv ett nyckelord att leta efter (åtminstone 3 tecken):
+91=Du glömde markera meddelanden som ska flyttas!
+92=Du har inte behörighet att skicka epost (SMTP är avstängd)!
+
+;### Sending
+93=Skicka meddelandet
+94=Lägg till och flytta bifogade filer
+95=Spara meddelandet
+96=Växla till text redigerings läge
+97=Växla till HTML redigerings läge
+98=Adressbok
+99=Prioritet
+100=Lägg till mottagare i adressbok
+101=Spara en kopia i Skickat katalogen
+102=För många mottagare
+103=Tillåtet
+104=Maximal tillåten meddelande storlek är
+105=Ett fel uppstod när din epost skulle sändas!
+106=Ditt meddelande är sänt!
+
+;### Upload
+107=Ladda upp bifogade filer
+108=Förbjudna filtyper
+109=Ladda upp
+110=Nuvarande bifogade filer
+111=Rensa alla
+112=Ett fel inträffade när du skulle ladda upp filer (ladda upp kan vara för stor)!
+113=Tillgänglig
+114=Stäng
+
+;### Config/info
+115=Konfiguration av 
+116=Hämtar
+117=Lösenord
+118=Bekräfta lösenord
+119=Epost adress
+120=POP konto
+121=Note: Aktivering av denna inställning kommer att ta bort nya meddelanden från servern!\nVill du ändra denna inställning?
+122=Radera meddelanden från källservern 
+123=Kontrollera ny epost efter inloggning och sändning
+124=Vidarebefordra automatiskt till
+125=meddelanden per sida
+126=Tabort raderad epost efter
+127=Radera epost från server som är äldre än
+128=VARNING: Denna inställning kommer att permanent ta bort gamla meddelanden från POP servern!\nBekräfta inställningen, eller rensa fönstret för att ångra funktionen.
+129=Inbox filter
+130=Rensa tidigare raderade meddelanden i listan (förhindrar meddelanden fortfarande på servern från blir hämtade igen)
+131=Rensa historia
+132=Läser & Sänder
+133=Spela upp ljud vid ny epost
+134=Visa meddelandets ålder istället för datum
+135=Visa meddelanden som förhandsgranskning i katalogen
+136=Använd popup fönster för sändning och läsning
+137=Göm avanserade funktioner
+138=Spara en kopia av skickade meddelanden
+139=Spara INTE bifogade filer om meddelandet är större än
+140=Character set
+141=Skapa kataloger (en per rad)
+142=Signatur
+143=Spara
+144=Auto uppdatera
+145=Max antal POP konton är
+146=Ditt lösenord är för kort! Min längd: 
+147=Lösenorden matchar inte!
+148=Min antal kataloger som används
+149=WebMail info
+150=Generella
+151=Användarnamn
+152=NT Användare
+153=Inloggad tid
+154=Epost senast kontrollerad
+155=Antal inloggningar
+156=Tidigare inloggningen
+157=Tidigare IP
+158=Max meddelande storlek
+159=Meddelanden sparas krypterade
+160=Skicka epost (SMTP) är avaktiverat
+162=Statistik
+163=Bandvidd
+164=Använt den här inloggningen
+165=Begränsning per månad
+166=Använt den här månaden
+167=Tillgänglig
+168=Brevlåda
+169=Max brevlåde storlek
+170=Nuvarande använt
+171=Tillgänglig
+172=Katalog
+173=Meddelanden
+174=Storlek
+175=Totalt
+176=Databas totalt
+177=Antal meddelanden
+178=Total storlek av meddelanden
+179=Antal användare
+180=Antal grupper
+181=Aktiva användare
+182=Senaste POP loggen
+183=Hem
+184=Manual
+185=Tillbaka
+
+;### Subscribe
+186=Registrera
+187=Användarnamn
+188=Epost adress
+189=Ett lösenord kommer att skickas till den epost adress du anger. Om du inte använder kontot inom 3 dagar kommer det att raderas. Ditt lösenord och POP konto information kommer att vara sparad i databasen krypterad.
+190=Ditt lösenord har skickats till dig via din epost.
+191=Ingen giltig epost adress hittades i det här kontot!
+
+193=Hög
+194=Låg
+195=Format: Epost, POPServer, Konto, Lösenord
+
+'### My URL's, Notes, book
+197=Mina länkar
+198=Inga länkar inlagda än!
+199=Lägg till och tabort länkar och kategorier
+200=Ändra
+201=En länk per rad. Exempel: Länknamn, www.domain.com
+202=Sortera lista när den sparas
+203=Lägg till ny kategori
+204=Lägg till
+205=Är du säker på att du vill radera länken?
+206=Radera
+207=Del
+208=Redigera mina länkar
+
+209=Skriv ner en anteckning
+210=Anteckna
+211=Lägg till ny anteckning
+
+213=Adressbok
+214=Kategori
+215=Håll ner CTRL för att välja fler adresser
+216=Lägg till och tabort epost adresser och kategorier
+217=Markera alla
+218=Redigera adressbok
+219=En adress per rad. Exempel: Mitt namn <me@domain.com>
+
+220=Den här epost adressen accepteras inte!
+221=Det här användarnamnet används redan, va vänlig välj ett annat.
+222=Det gick inte att skapa nytt konto!
+223=WebMail inloggnings information
+224=Det gick inte att skicka din epost.
+225=Kontot kunde inte hittas!
+
+'### Inbox filters
+226=Inbox filter
+227=Huvud
+228=Alla nya meddelanden som matchar något av de kriterium kommer att automatiskt bli flyttade till vald mapp. Använd ett kommatecken i en avgränsad lista för att använda multipla villkor i Innehåller fältet (villkoren kommer att matchas med innehållet). Lämna Innehåller fältet tomt för att ta bort filtret. Exempel: Porr, Viagra, Fria pengar
+229=Om
+230=Innehåller
+231=Flytta till
+232=Lägg till filter
+233=NOTE: Filter kommer inte att användas till meddelanden från avsändare i din adressbok.
+234=Meddelande
+
+235= ==== Original message ====
+236=Delete all messages
+237=ATTENTION: Are you sure you want to delete all messages in this folder?
+
+238=Move all messages
+239=Truncated message
+240=This message was downloaded partially. Click to download the rest.
+241=Find messages
+242=Entire message (slow)
+243=Search for
+244=Find

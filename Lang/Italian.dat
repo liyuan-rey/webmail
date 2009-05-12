@@ -1,0 +1,283 @@
+;############################
+; Language file for Webmail (http://www.iisworks.com)
+; Add a ";" to comment (part of) a line.
+; 27/08/03 Italiano - Contributed by Andrea De Togni
+;############################
+
+;### Language specific system settings
+0=ISO-8859-1 ;Charset for this language
+1=1033 ;LCID
+192=Posta in arrivo, Posta eliminata, Posta inviata, Bozze ;### Built-in folder names. Do not change order!
+196=Anni, Mesi, Settimane, Giorni, Ore, Minuti ;### Names for timeperiods
+
+;### Login page
+2=Utente
+3=Password
+4=Salva nome utente
+5=Login
+6=Iscriviti
+7=Invia password
+8=Lingua
+9=Salva il nome utente in un cookie sul tuo computer
+10=Nome utente o password errati!
+
+;### Listing
+11=Da
+12=Oggetto
+
+13=Data
+14=Età
+15=Dim.
+16=A
+17=Nuovi messaggi
+18=Mittente
+19=Data invio
+20=Ultima lettura
+21=Data ricezione
+22=Ricevuto da IP
+23=Destinatari CC
+24=Alta priorità
+25=Bassa priorità
+26=Messaggi
+27=trovati
+28=Non letto
+29=Prima pagina
+30=Precedente
+31=Successiva
+32=Ultima pagina
+33=Monthly bandwidth limit exceeded! Sending and receiving is disabled.
+34=Scrivi una nuova email
+35=Sposta messaggi selezionati
+36=Sei sicuro di voler eliminare tutti gli oggetti selezionati?
+37=Cancella messaggi selezionati
+38=Trova testo nei messaggi in questa cartella
+39=Cancel find mode
+40=Segna messaggi selezionati come Letti
+41=Segna messaggi selezionati come Non letti
+42=Invia i messaggi selezionati come allegati
+43=Abilita/disabilita anteprima
+44=Mostra collegamenti
+45=Prendi appunti
+46=Seleziona cartella da aprire
+47=Configurazione account
+
+48=Gestisci utenti e account
+49=Informazioni account e casella
+50=Disconnetti da Webmail
+51=Vai alla homepage
+52=Ricevi nuovi messaggi
+53=(De)seleziona tutti i messaggi
+54=Mostra ultimo POP log
+
+;### View message
+55=Chiudi finestra
+56=Torna alla lista
+57=Rispondi al mittente
+58=Rispondi a tutti
+59=Inoltra
+60=Stampa
+61=Mostra intestazioni
+62=Apri in nuova finestra
+63=CC
+64=CCN
+65=I link esterni in questo messaggio sono bloccati!
+66=Le immagini incorporate nel messaggio possono dare conferma agli spammers che la tua casella è attiva.\n Sei sicuro di poterti fidare di questo mittente e vuoi aprire il messaggio originale?
+67=messaggi non possono essere scaricati perché la dimensione limite della casella è stata raggiunta! Cancella alcuni messaggi e riprova.
+68=Nuovi messaggi scaricati
+
+69=Ultima verifica alle 
+70=(non ci sono nuovi messaggi)
+
+;### Context menu
+71=Nuovo messaggio
+72=Controlla email
+73=Sposta
+74=Cancella
+75=Cancella da Webmail
+76=Segna come Letto
+77=Segna come Non letto
+78=Sei sicuro di voler cancellare tutti i messaggi selezionati sia da Webmail che dal POP server?
+79=Cancella dal server
+80=Sei siucro di voler eliminare tutti gli allegati dai messaggi selezionati?
+81=Rimuovi allegati dai messaggi selezionati
+82=Rimuovi allegati
+83=Aggiorna
+84=Schermo intero
+85=Informazioni casella
+86=Aggiungi alla rubrica
+
+87=Sposta nella cartella
+88=Annulla
+89=Sposta
+90=Inserisci le parole chiave da ricercare (minimo 3 caratteri):
+91=Seleziona almeno un oggetto!
+92=Non disponi delle autorizzazioni per inviare le email (SMTP è disabilitato)!
+
+;### Sending
+93=Invia messaggio
+94=Aggiungi e rimuovi allegati
+95=Salva messaggio
+96=Passa in modalità testuale
+97=Passa in modalità HTML
+98=Rubrica
+99=Priorità
+100=Aggiungi destinatari alla rubrica
+101=Salva una copia nella Posta Inviata
+102=Troppi destinatari
+103=Permesso
+104=La dimensione massima del messaggio è di 
+
+105=Si è verificato un errore in invio del messaggio!
+106=Il messaggio è stato inviato!
+
+;### Upload
+107=Invia allegati
+108=Tipi di file vietati
+109=Invia
+110=Allegati attuali
+111=Cancella tutto
+112=Errore in invio del file (il file può essere troppo grande)!
+113=Disponibile
+114=Chiudi
+
+;### Config/info
+115=Configurazione di  
+116=Scaricamento
+117=Password
+118=Conferma password
+119=Indirizzo email
+120=POP account
+121=Nota: abilitando questa opzione verranno cancellati i nuovi messaggi dal server!\nSei sicuro di voler cambiare questa opzione?
+122=Cancella messaggi dal server origine
+123=Controlla nuova posta dopo login e invio
+124=Inoltro automatico a 
+125=Oggetti per pagina
+126=Cancella posta eliminata dopo
+127=Cancella posta dal server se più vecchia di 
+128=ATTENZIONE: impostando questa opzione i messaggi verranno eliminati permanentemente dal server!\nConferma la tua decisione oppure deseleziona la casella per disabilitare la opzione.
+129=Filtri posta in arrivo
+130=Cancella ultima lista dei messaggi cancellati (fa in modo che i messaggi ancora sul server non vengano recuperati di nuovo)
+131=Cancella storico
+132=Lettura & Invio
+133=Suona messaggio audio quando arriva nuova posta
+134=Mostra età dei messaggi invece che data
+135=Mostra anteprima automatica del messaggio nella lista
+136=Usa nuove finestre per lettura e creazione
+137=Nascondi funzioni avanzate
+138=Salva una copia dei messaggi inviati
+139=Non salvare allegati se il messaggio supera
+
+140=Set di caratteri
+141=Cartelle personali (una per linea)
+142=Firma
+143=Salva
+144=Aggiornamento automatico
+145=Il numero massimo degli account è 
+146=Password troppo corta! Lunghezza minima: 
+147=Le password non corrispondono.
+148=Numero minimo di cartelle da definire (in uso)
+149=WebMail info
+150=Generale
+151=Nome utente
+152=Utente NT
+153=Tempo accesso
+154=Ultimo controllo email
+
+155=Numero di accessi
+156=Ultimo accesso
+157=Precedente IP
+158=Dimensione massima dei messaggi
+159=Cifratura dei messaggi memorizzati
+160=Invio delle mail disabilitato
+162=Statistiche
+163=Banda
+164=Usata in questa sessione
+165=Limite mensile
+166=Usata in questo mese
+167=Disponibile
+168=Caselle
+169=Dimensione massima caselle
+170=In uso attualmente
+171=Disponibili
+172=Cartelle
+173=Messaggi
+174=Dimensione
+175=Totale
+176=Totale database
+177=Numero di messaggi
+178=Dimensione totale dei messaggi
+179=Numero utenti
+180=Numero gruppi
+181=Utenti attivi
+182=Ultimo log POP
+183=Home
+184=Manuale
+185=Indietro
+
+;### Subscribe
+186=Iscriviti
+187=Nome utente
+188=Indirizzo email
+189=Una password iniziale verrà spedita alla email specificata. Se non userai questo account entro tre giorni, verrà disabilitato. La tua password e il tuo account POP sono salvati nel nostro database criptati.
+190=La password è stata inviata.
+191=Non vi è un indirizzo email valido per questo account!
+
+193=Alta
+194=Bassa
+195=Formato: Email, POPServer, Account, Password
+
+;### My URL's, Notes, book
+197=I miei link
+198=Non ci sono ancora dati!
+199=Aggiungi e rimuovi link e categorie
+
+200=Modifica
+201=Un link per linea. Esempio: Nome, www.indirizzo.com
+202=Ordina la lista al salvataggio
+203=Aggiungi categoria
+204=Aggiungi
+205=Confermi la cancellazione?
+206=Cancella questa linea
+207=Canc.
+208=Modifica i miei link
+
+209=Prendi appunti
+210=Appunti
+211=Aggiungi appunti
+
+213=Rubrica
+214=Categoria
+215=Tieni premuto CTRL per selezionare più oggetti
+216=Aggiungi e rimuovi indirizzi email e categorie
+217=Seleziona tutto
+218=Modifica rubrica
+219=Un indirizzo per linea. Esempio: ""Mio nome"" &lt;miaemail@indirizzo.com&gt;
+
+220=Questo indirizzo email non è accettato!
+221=Questo nome utente è già in uso, scegline un altro.
+222=Errore nella creazione account!
+223=Informazioni sul login in Webmail
+224=Si è verificato un errore in invio del messaggio.
+225=Account non trovato!
+
+;### Inbox filters
+226=Filtri posta in arrivo
+227=Intestazione
+228=Tutti i nuovi messaggi che rientrano nei filtri verranno automaticamente spostati nella cartella selezionata. Usa la virgola per separare più termini nel campo Contiene (uno qualunque sarà valido). Lascia il campo Contiene vuoto per eliminare un filtro. Esempio: Porno, Viagra, Soldi facili
+229=Se
+230=Contiene
+231=Allora sposta in 
+232=Aggiungi filtro
+233=NOTA: i filtri non verranno applicati ai messaggi provenienti da mittenti che sono nella rubrica.
+234=Messaggio
+235= ==== Messaggio originale ====
+236=Cancella tutti i messaggi
+237=ATTENZIONE: Sei sicuro di voler cancellare tutti i messaggi in questa cartella?
+
+238=Move all messages
+239=Truncated message
+240=This message was downloaded partially. Click to download the rest.
+241=Find messages
+242=Entire message (slow)
+243=Search for
+244=Find

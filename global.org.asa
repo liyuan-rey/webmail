@@ -1,0 +1,99 @@
+<SCRIPT LANGUAGE="VBScript.Encode" RUNAT="Server">
+
+'########################
+Sub Application_OnStart
+'########################
+Application.Lock
+'############################################################################################
+' This section contains important WM settings. You can edit them to fit your needs.
+' Lines with an apostophe ( ' ) in front of them are commented out and therefore inactive. Uncomment them if necessary.
+'############################################################################################
+
+'############################################################################################
+'###### System settings ###### 
+'############################################################################################
+Application("DBConnection")="DBQ=" & server.mappath("database/webmail.mdb") & ";Driver={Microsoft Access Driver (*.mdb)}" '### Database connection string.
+'Application("DBConnection")="DSN=WM"
+'Application("IsAccessDatabase")=True '### Date handling is different for SQL/Access. If not defined WM will try to auto-detect 
+Application("Debugging")=True '### If true: All error messages will be shown and script processing is stopped when an error occurs (Normally debugging should be disabled)
+Application("LogFile")=Server.Mappath("webmail.log")
+Application("LogLevel")=2 '### Set WM log level: 0=Nothing, 1=Normal, 2=High, 3=Debug
+Application("MailRoot")=Server.Mappath("Mailboxes") & "\" '### Base path where all mailfolders are located (make sure to add a trailing backslash)
+Application("MaxRefreshTime")=8 '### Time in hours before auto-refresh of the users inbox is disabled (prevent endless refreshing of clients.)
+Application("AllowFullSearch")=True '### Allow users to do a full search (file based). If not, only Sender, Subject and Recipients fields are searched.
+Application("ReadBytesForSearch")=128*1024 '### Defines the blocksize that is read from the message file for searching. Most relevant text will be in the first part of a message.
+Application("MaxSearchMessages")=1000 '### Maximum number of messages to search on Find actions to limit server load (Default: empty=unlimited)
+Application("HiliteSearchresults")=True '### Highlights search results in the resulting message
+Application("SessionTimeout")=30 '### Session timeout in minutes (idle time before user session will be ended by IIS)
+Application("ComposeSessionTimeout")=120 '### Session timeout in minutes for "Compose email" page (to prevent time out while a user is still typing a message)
+Application("ScriptTimeout")=300 '### Time scripts are allowed to run before they time out (seconds)
+'Application("SelectLanguageOnLoginPage")=True '### Show the language selectbox on the login page.
+Application("DefaultLanguageFile")="English.dat" '### Default language file to use.
+Application("DefaultLCID")=2048 '### The LCID setting used to convert dates to the system setting (regardless of client session LCID). System default=2048, US=1033. See http://www.microsoft.com/globaldev/reference/lcid-all.mspx
+
+'###### NT Integration and security #########################################################################
+' Anonymous access for the virtual directory needs to be revoked in IIS to use this feature. 
+' To restrict access to FM you can apply proper NTFS permissions to login.asp (or the entire FM folder). Login as Domain\Username
+' Make sure that FM accounts exist for each NT User, or set AutoCreateNTUsers=True to create them automatically.
+'######
+'Application("UseNTAuthentication")=True '### Use integrated NT authentication (if Anonymous is disabled in IIS). This logs in NT validated users automatically. 
+Application("AutoCreateNTUsers")=True '### Auto-create non existing authenticated users if NT authentication is enabled (with default values for database fields).
+Application("AllowedIP")="" '### Comma delimited list of allowed IP numbers/ranges. Example: "192.*,10.0.0.*" 
+Application("DeniedIP")="" '### Comma delimited list of denied IP numbers/ranges (this setting overrides AllowedIP). Example: "192.*,10.0.0.*" 
+
+'############################################################################################
+'### Webmail settings
+'############################################################################################
+'Application("HomeLink")="/" '### If defined: show a home button linked to this page
+Application("UseContextMenu")=True '### Use right-click context menu of main WM functions (IE5+ only)
+Application("PageBGColor")="FFFFFF" '### Background color for pages
+Application("TableHeaderColor")="666688" '### Background color of table headers
+Application("OpenAttachInPopup")=True '### Open attachments in a popup window
+Application("PreviewColor")="444480" '### Color of preview text
+Application("ShowMessageInfo")=True '### Show message info (tooltip on the message icon)
+Application("SoundFilename")="notify.wav" '### Name of the sound file that will be played when new mail is received (if enabled). Must be present in the WM folder.
+Application("FixInvalidDates")=True '### Set the message date to the current date/time if it is invalid (Older than 30 years, or in the future)
+Application("AttachRemovedInfo")="[Files removed]" '### String that will be added to the Subject when attachments are removed from messages
+Application("UseTextBody")=True '### Use text version of a HTML message for reply (if present)
+Application("MakeLinksInText")=True '### Convert web links in plain text messages and convert them to clickable HTML-style links
+Application("AllowPreview")=True '### Allow users to use a message preview (First 255 chars of message are stored encrypted in the database). 
+Application("AllowAutoRefresh")=True '### Allow users to use auto-refresh (automatically retrieve email every n minutes)
+Application("AllowInboxFilters")=True '### Allow users to define inbox filters
+Application("IgnoreKnownSenders")=True '### Wwhen applying the inbox filters: ignore emails from senders that are in the address book
+'############################################################################################
+
+''############################################################################################
+'### Mail & subscription settings
+'### Make sure that relaying is allowed from the machine where webmail runs, or use SMTPAuthentication
+'### If a textfile "Disclaimer.dat" exists, it will be appended to all outgoing messages.
+'############################################################################################
+'Application("AllowSubscriptions")=True '### Allow all users to subscribe to Webmail. An initial pass will be sent to them to confirm the subscription.
+Application("SMTPMailServer")= "Localhost" '### SMTP Mailserver to be used to send email
+Application("SMTPPort")=25 '### SMTP port, default=25
+Application("UseSMTPAuthentication")=False '### Set to True if the mailserver requires SMTP Authentication
+Application("SMTPAccount")= "test" '### SMTP Authentication account name (only used if UseSMTPAuthentication=True)
+Application("SMTPPass")= "test" '### SMTP Authentication account password (only used if UseSMTPAuthentication=True)
+Application("PopTimeout")= 5000 '### POP timeout (ms)
+Application("DefaultGroupID")=2 '### Defines default group membership for new subscriptions (set this value to the GroupID of the default group)
+Application("FeedBackEmail")= "no-reply@yourdomain.com" '### Reply=to Email address used to send password
+Application("ServiceURL")= "http://www.iisworks.com/webmail" '### Link mentioned in the email sent to new users
+Application("AutoMaintenance")=True '### Perform automatic maintenance on the database if AllowSubscriptions=True (never used for n days). Make sure the time on the server is OK!
+'Application("DisableAccounts")=True '### Disable unused accounts instead of removing them (if AutoMaintenance=True)
+Application("CleanUpAfterDays")=90 '### Defines after how many days cleanup of inactive accounts should be performed
+Application("AllowedDomains")="" '### If defined: only these email addresses/domains are allowed to subscribe to the service and be used in the POP account list (Comma delimited list, for example:"dom1.org,dom2.com")
+Application("DeniedDomains")="hotmail.com,yahoo.com" '### If defined: email addresses in these domains are rejected for subscriptions and in POP account list (Comma delimited)
+
+'###### IMPORTANT! #########################################################################
+' This 16 byte key is used for encryption of passwords, POP account info and messages of all WM users of this installation.
+' 1) Only change the EncryptionKey before any users are present. 
+' 2) Store a copy of the key in a safe place! 
+' 3) If you change it when accounts have already been created information *will* be lost!
+' 4) When upgrading WM: don't forget to copy back your own old key here!
+'###### IMPORTANT! #########################################################################
+Application("EncryptionKey")="èäÌ¼Y¢¡:§È°z‘;÷§"
+
+'############################################################################################
+' End User settings
+'############################################################################################
+
+'**Start Encode**#@~^NCgAAA==@#@&b2aVbmlDkKU`rHC6G+snDkW	ukkYWMz3xDDb+dJbxl!TPE:a[PH;s4+.~K0~:dklLP&fBkPD4lDPCDPdC7+N,AtxP9ns+Dk	o~:ndklL+k~/KPO4mYPO4X~hbs^PUKY,4+,DODb+-+9PGU,x+XOPslk^^4+13BPn\nU,kWPD4+HPC.P/Or^V~W	~Dtn,/D\D@#@&bawsk1lOrKx`r#+M/kKUE#{J2RqtE@#@&b2w^rmmYrG	`J	\zw2qk(	kObl^kyNrb':D;+@#@&)2aVk1CYbWxvEHEsSmxL2UOMkn/rb'y&0~Eaa:~tlaks;sPr	N6PK0,nxDDr+kPrU,Yt~Vmxo!CL+,0bVnPci~W;x9~W6PC.MlXb~DW~\msbNCD+,Vl	o!CoPWk^+d@#@&@#@&E:a[Pqk~9lDl(ld+~j5S~WM~b1mndkgPc9b0W+Mn	Y~GlD+fb0,4l	Nsk	o~r	Pb!OWtlk	Onxmx1+bP::[@#@&q6~bawsr1lYrG	`Eqk)1mnk/GlYm4md+r#xJrP)HGPq	dYM`FB)2w^k1lOkGUvJ9A;Gx	+^ObWxEbBJ :98r~q*@*ZPK4+	~bawsk1lOrKx`r(/zmmddfmYm4C/nE*'PD!nP@#@&@#@&zwwsr1lOkKUcjUdW13@#@&MOSmxLEmonJb/Y@#@&MYSmULEmoP)w2sbmCYbGxvJ9n6lEsOdlUo!CT+obVJ#@#@&AUN,?;4@#@&@#@&Eaa[:a[aa[::a[a[a:a::[a:a@#@&?!4~)awVr^mYrW	m}x3	N@#@&B[a[:a[a:a[a::[aa[:a[aa[:@#@&Ax9PjE8@#@&@#@&B[:a[a::[aa::[a:a[:[a:[a[@#@&UE(~?/dkKxm6	?Ym.Y@#@&B[::a[a[a:a::[a:a[:a[a::[@#@&(W,In;!nkY U+M\+M.m.km4s+k`Eu:Kn|p{wrIq)]fAf|s6IEb@!@*EJ,Ptx@#@&i?+ddbWU`rKMWaHJ*'JhDKaX=PEPLP]n$E+kORU+D7n..mDbl8VndvJuK:K{jq)E*P[~#(KC4,',In$E/Yc?.\D#lMkC8^+/vEIAHr:3mbGf"Jb@#@&7U+d/bGxvJ(Kr#']n$En/D U+.7+M.lMkm8V/cJ_KPK|({w6IqbIG39{wr"Jb@#@&3^/n@#@&7?/drKx`E(hJb'"n$EnkYc?+M\..mDrl(VndvJIA\r:2{z99Ir#@#@&3x[~&0@#@&&WPzw2sbmlOrKxcJ`d1PzEDt+	Yb^lDkGxr#~P4+x,j+k/kKUcJgK`/nDEb{In;!n/DRjnM\+.#mDrl(s/crb`KC|jU3Ir#@#@&@#@&v:[aP;s+mxP!2~l1mKEUYd~DtCY,A+M+~^M+lOn9PhWMn,Y4mx,xP9lHdPmoG~,4;O,x+7nD,E/[@#@&&0,b2wsr1lOkKU`rb;OKHlrUD+Ul	^Jb,bgfPzwask1lOkKxcEzVVKA?!4/1.rwDkKxdJb~z19PGCYfrW6`J4EBP)wasbmCDkKx`rSmdYtlrxDJbSgWh*@*FyPK4nUPGlDl8ldntlrxDnxmx^n@#@&@#@&v[a:PUnDPCaw,Vl	o!CoPWk^+~CkPNWl!VY@#@&j+k/bWU`EjDDE#{)waVr^mYkGUvJjYME*P@#@&BU+/kkKURdZ(f{FTf8PB8T&2'jU@#@&2	N,?;4@#@&@#@&va[:a[a::[aa::[a:a[:[a:[a@#@&?!4,j+k/rW	{6UAxN@#@&B[aa[::a[a[a:a::[a:a[:a[a@#@&Erx~nMDGD,./;s+,x+XY@#@&q6Pj+k/rG	`J&dSKoo[rxr#,K4+U@#@&d)wask1lOrKx`E)1Yr\;k+.kJ*'baw^rmmYrW	`E)1Yk7nEk+DkEbO8@#@&d	DrOSGodrxPEJKoW;Or@#@&dUnDP/Kx	'?D7nDcZ.+mYn6(L+1O`rbf}9$R;W	xnmOrKxE#@#@&d;WUUcHW[n,'~&@#@&iZG	xcrwx,)waVrmmYrG	`JG$ZKxx^OkKxr#@#@&7vUpJ',Ejhf)PAPb^^KEUYk~U2P,1!:SKobU/{J~[,?ndkkW	cJgE:dGLk	/r#~[~EBP9+^nYbWUub/YG.H'vJ,',sGM:mY?5Svj+k/rW	`E9V+DrW	CkkOGDHJ*#~[~EE~~AmUNSk[O4j/n[{J~[,]KEU9`U+/kkKU`rACx9hr[DtJ*bPLPJB~,1KYTxBE~LPoWMhlD?}Jv?+ddbWU`rHKYnr#*P[,JESPzN[D/d$KW3{vJ,[PwG.:mYUpJ`jnk/rW	cJzN[.//$GK3E#*~LPEE~,jIdSbdY{BEPLPoGM:lDjpd`?ddkKxvJiIJJb/OJ*bPLPEvBPsrsD+.SbdD'vrPLPsKDsCYUpJ`U+ddbWxvEsbVY.JkkYr#bP'~rBSPdC/DSGLbx'vE,[~ZKU7fCD+v?+k/bGxvJJWTkUPb:+rb#,[PrvSPdlkY(nxvrP'PUn/kkGUvJqKE*P'Prv,uAIAP$`/.qGT~'rP'~U+/krW	`J`dnD&fr#~[~EpJ@#@&ijpd'~E`nf)PAP)m1G!xOkPU2K,1!hSKorxk'E~LP?d/bWxvEHEsSKorxdE*P'PrSPG+snDkWUub/OWMz{BE,[,sWM:mO?5Sc?/drKx`r9+^+YbGUCb/DW.XEb*P'Prv~,ACU9hk[O4jd+9x~lU9hbNY4jknN,_~J,[~]KEx9c?//bGU`rAmx[hr[DtE#*~[,JS~wkVOnMSr/DxEJ~LPwWDslDjpd`j+k/rG	`JwrVD+DdrdYr#*P'PEvBPJlkOSKorU{BJ~',ZGx79mYnv?//bW	cJdWLk	KrhJ#*~[,JBB~JlkY&nxBE~LPj+kdkKxcE&nJb~LPEB,	_2]AP]j/D&9T,'EPLPjnk/kKU`rj/.(fr#,[~JIE@#@&7BS.kD+sGTVkUn,/5V@#@&iZG	xc+6m!O+v?}S*@#@&7;Wx	 Z^W/@#@&dU+DP/WUU{1GY4rxT@#@&@#@&d?nO,0dW,x,?nM\DR;DCYr8LmOcr?mMrwDkxT ok^+UXdYnh}4%+1OJ*@#@&7;V+C.:+hw,j/dbW	`J:+s2sKV[+MJb@#@&d?OP6/W,x~1KY4kUo@#@&Ax[P&W@#@&2U[,?E8@#@&@#@&B[:[a:[a[aa[a[:a[a:a[a::[@#@&UiA,ZVC.K:a`dY.jKE.m9kM#@#@&Eaa::[a:a[:[a:[a[aa[a[:a[@#@&r	P3.MWD,]+kE:~H+XY@#@&j+O~6/GP{~?D-nMRZ.nmYnr(%mOvJUmDbwDrxTRok^+jzkY+s64N+mDEb@#@&?Y~WoG^NnD,xP6/G V+YoG^NnDvdDDjKEMm+GkMb@#@&?nY,Wor^+/,xPKsW^[nDcsbVn/@#@&wW.PACm4P(O:PrU,Wok^nk@#@&iqD+:cfs+D+~KMEn@#@&1+XO@#@&?+D~WV9D,'~WoG^NnDcjE(sGs9+Dd@#@&sGD,3mm4,qD+:,k	~0^N.@#@&d(O:RGnVY+,P.E@#@&1n6O@#@&2UN,jE(@#@&@#@&Ba::[a:a[:[a:[a[aa[a[:a[a@#@&Uj$~qDkDnSKoSbUn`s/T#@#@&v:[a:a[:a[a::[aa::[a:a[:[@#@&U+DP0kW,xPU+.\D /M+lDnr(L+1OcJUmMk2YrUTRok^n?H/Onsr4%n1YE#@#@&U+O,0S'0kWcGwxP+XYor^+`z2w^kmmOrW	`rSGoor^+E#B0~DD;n*@#@&WAch.kDn^kUPgWh,[,#4:l8PLPjnk/kKU`rqnrb~[,.(KC4~',?n/krW	`Eik+DEb,[~.(Pm4~LPt/o@#@&UnY,0dW,'~HKYtbUo@#@&2	[~?`A@#@&@#@&v:[a:a[:a[a::[aa::[a:a[:[@#@&wE	mYbW	~ZM+CYnCO4`/hCY4#@#@&v:a[a[a:a::[a:a[:a[a::[aa@#@&U+OP6dKPx,?D\Dc/DlO+}4%n1Y`rjmMkwDrUocsbVn?zdD+hr(%+1YEb@#@&qW~6/GR6G^NnM+Xk/D/vdnmY4#,K4n	@#@&i/DlYKCY4':D;+@#@&AVd+&WP&xdOM`/KCDtSJ'E*@*T,K4+x@#@&i2Wk'(xkY.c2~/hCY4~J'ESF*@#@&dCKh2{?2VbO`tk[cknlO4BwG/3q*~E'J*@#@&i/gnhhlOt{SnWD`/hCY4~wKdRF*@#@&doW.~	PxPZ~YKPi8KEx[cmKhw*@#@&d7}x,2DMWM~D/;:PUnXYPE(o	WD~2+M:b/dkGU,w.W(s+s/~G	PtrL4+.P^n7+sk@#@&ddk1AnmY4P{PdHhnmOt,[PrwEPLPmKhwcU*@#@&di(0,lPha`xb@!@*JEPzHGPH}K,0/KRwGV9+.2XkdOk`/gnhhlY4b~K4+	PW/G ;DnlDnsKV[nMP/HnSnCY4@#@&dH6D@#@&iq6~0kW sKV[nM26bdYk`/hCOt*P:tnx~/M+CYKlDtxPME+~3^/nP;.lOnmYt{sms/@#@&2	N~(6@#@&UnY,0/K~xPgWDtrxL@#@&2UN,oE	mOrKx@#@&@#@&B:a[:[a:[a[aa[a[:a[a:a[a:@#@&?E(~fmYl(Cd+tlbxO+UC	mn@#@&va[a::[aa::[a:a[:[a:[a[aa@#@&i(0,b2w^k^CDkW	cJG+4!LLk	or#xsCsk+~K4nx,rU~ADDG.,Dn/!hPU6D@#@&iba2VbmCYbWUcrSlkOHmkxDEb'gWS@#@&d@#@&iB:a[~ra+U~1WxUn1YrW	@#@&djY,ZW	x{j+M\nDcZ.nmY+}8LmYvE)f}f~R/WUUmOkKUJ*@#@&7U+Y~]U'j+M-D ;DlYr(%+1YcJzf69~RI^WMN?OE#@#@&iZGxU tW[+,xP2@#@&7;WxU ;WUx^DkG	Kb:+KEDx Z@#@&d;WUUcrwUPzww^r^lDkKxcJ9$;WUx^YbWUE*@#@&7@#@&dva[:,Zsl	PEaPmsV,l^mKEUOkPY4CY,h+Mn~mM+mYnN~hKDnPD4l	PU~9lXd~moG~,8!Y~	+7+D,EknN@#@&7q6P)2aVk1CYbWxvE(/zm1+d/9CDl8lknJ*PP4x@#@&7i?}S{~rfn^+D+PwDKhPzm^W!xOd,CA]2,flDn[k60vB[BS9mYnZMnlD+[SgWhcb*@*fPzHGPJm/DSWTk	~qkPHE^VE@#@&d2^d+@#@&dij}S{PrfnVnOPoDKhPzm^G!xYd~qC3IA~GlONb00vNB9lD+/DlOn9~MONmY+vbb@*2Pz19PJCkYJWTrx,qd~gEVsE@#@&72	[,qWi@#@&dq6Pz2w^k^lDkGUvJSKLS\+^Eb@*ZP:tnx~	MkO+dGodkUn,JfCOm4C/~slr	Yxl	m~O,fnVYrUTPE	;/NPm^^W!xD/ J~vLPjpd@#@&iZGU	R2an1EO+vj5Sb@#@&@#@&dEa[:P;Vnl	P;2,lV^~l1mW!UO/,Y4lOP4C7+~xKOP(+nU,E/n[,0GD,U,NCH/@#@&d&0,)waVrmmYrG	`J&db1m+kd9lDl(ld+Eb,K4+	@#@&idj}d'PEjVnmD~]jdDY~P&/Gr/m4s+9~~Jm/YdGobxPw.G:,b1mGEUOkP	CA]2,fCONkWWvB[BBJm/OdWTkxB1KA`*#@*J,[~)awVb^lDkW	cEZ^+mxiw)WD+.fmz/r#~',JP)HGPJlkOdWLbx,q/,1}PPgEsVr@#@&7AV/@#@&id?5JxPr?VnmO~]jd+MD~,qd9b/l8sNSPdCkYJKobxPwDKhPzm^W!xOd,CA]2,flDn[k60vNSSCdDSGobU~V+O[mY+cb*@*EPL~zw2^k1lYbW	cJ;Vnl	j2)6Y+M9lH/J*~'PrPz19PJCkYJWTrx,qd~grK~H!VsJ@#@&i2U9P&0d@#@&i]?cr2+	Pj}d~ZKUx,~&Bf@#@&iB"+dwGUk+ hMrYPj}d@#@&7	4ks+,H}K~"?c2rw@#@&7d`/nD{Ijcrj/.J*@#@&i7va[a,rUVz~9kdl(s+,@#@&7iq0~)awsk1CDkG	`rfkkl(s+zm^W!xOdr#P:4+	@#@&i77q6P"?cJ(dGkdl(s+9JbxwlVdn,K4+	@#@&d7id&0Pzwask1lOkKxcEdWodn\VJ*@*TP:tx~.rD+JWTJk	+~EGlYC8m/nPsCbxOxmxmP ~fb/C4^kUL,kxm^Yb\+,;d+M),J~[~ik+.PL~J,`JCkYPsGTkU),ELP]U`rSlkYdGobxE#,[~E*J@#@&7didIUcEqkfb/C4sn9Jb':.E@#@&7idd]jcj2NmO@#@&idi2x9P&W@#@&d7B[a:~G+VO+,E/.~_,:mks0Gs9+.@#@&7dAVdn@#@&d77&0~ba2^k^mYbWxvJdGod+-+^Jb@*ZPK4nx,DbOnSKodkU+~EGlOl(C/PhCbxYnUmx^+,R,fn^+DkxTPbUl1Yr\P;dD),EPLPjkn.PLPrPcSCdDPsWTrx=PE',I?cEdldYdGTkUr#,[Pr#r@#@&id7Hmks]KWY{)waVk1COkKxvJ\lrs"WGYrbPLP]nsW\n(^Vnoms;tCM/vj/D*@#@&id7?Y~WkWP{~?D\. ZM+mYnr8%mO`rjmMk2Obxo obVn?HdD+h}4N+mDJ*@#@&id7q6PWdKR0KsND+XrdYk`tlrV]GKYbP:4+	PWdKRNnsYn0Ks9+.,HmkV"WKO~,K.E@#@&7idIU fV+Dn@#@&idAx[P(W@#@&7d"jRtW-ng+6O@#@&d	+	[@#@&7@#@&iBa[a,/VK/nP1WUUmYbGx@#@&d"j Z^Wk+@#@&7jY~IUx1KY4r	o@#@&7;WUxc/^Wd@#@&d?Y,/W	xx1KY4r	o@#@&3x9P?`$@#@&@#@&Ea:a::[a:a[:a[a::[aa::[a:@#@&o!x^DkKxPwWMhlD?}Sv/O.*@#@&E:a[aa[::a[a[a:a::[a:a[:a@#@&oGM:lOj5SxI2^l^`UYDBJEE~rBvJ*@#@&3	NPw;x1YkKU@#@&@#@&Ea:a::[a:a[:a[a::[aa::[a:@#@&o!x^DkKxPAx1.XaYP+XYcdDDKaYB/YMFnX*@#@&B:a::[a:a[:a[a::[aa::[a:a@#@&&0~kYMK+XY@!@*JrPPtx@#@&i|+HJ+	'SUc/DDn+z#@#@&iInfbhPm|nzv|+zJxb@#@&7wW.,k{FP:W,F+HSnx@#@&77m|+Hck*'bk^cHbNv/ODFnH~r~,q#*@#@&7g+6O@#@&doWM~b'q,KKPSxvdYMKn6D#@#@&idq6~L{|+HJnx,K4+UP%x8P3VknPN'%Q8@#@&7dDD3x1~{PdDDAxm,[,/tM`)/1`\r9`/D.K6YB~r~,F*#~(6],lF+HcL*#@#@&i1+aO@#@&72	^MX2DK6Y,',dYM2Um@#@&3U9Pq6@#@&AxN,o;x1YbWU@#@&@#@&B:a[:a[a::[aa::[a:a[:[a:[@#@&sE	mDrW	P64N+^OA6kkO/vWZ^Cd/*@#@&B:a::[a:a[:a[a::[aa::[a:a@#@&irU,2MDWMP"n/!:nPg+aO@#@&dUnY,W4Nxj+M\D Z.nmYnr(%+1YcG;Vldd*@#@&d&W,2.MP:t+	P}8LmO2XkdOk'sms/P2^dnP}4N+^Y3ab/O/{PD!+@#@&i?+O~}4%'gGDtr	o@#@&2	N,oE	mOkKx@#@&@#@&B[:a[aa[::a[a[a:a::[a:a[:@#@&s;U1YkGU,In:K-qs^+TlV;tm./v/OD*@#@&v[aa[:a[aa[::a[a[a:a::[a:@#@&7/DDx]wVC^`dYMSrzEBJ|J#@#@&idYM']+aVC^`/D.~r-JBEmJ*@#@&ddY.x"+2Vm^+v/O.BJgESr{E#@#@&i/OM'"+w^l1n`kY.~reESr{J*@#@&i/YMx]+aVmmn`dOM~E@*rSJ|Jb@#@&d/O.{Inw^C1+ckYM~J@!JBE{r#@#@&i/O.{I+asl1+`kO.~rur~E{Eb@#@&7/D.'"+2smm+cdDDSJ=EBJmr#@#@&dkYMxIwsl1+cdDD~rvJBJ{rb@#@&iI:G\n(^VnomsZ4l.d{?Y.@#@&2UN,o!x^DkKx@#@&@#@&va[a:a[a::[aa[:a[aa[::a[a@#@&oEU^DkGx,/W	\9CD+`P4fCYb@#@&v[a[aa[a[:a[a:a[a::[aa[:a@#@&d}s[S;qG'j+ddbWURd/qG@#@&7U+/drKx S;(G')aw^kmmYbGxvJ9+6l;sDSZ&9J*PBUzdY:,Nn0C;^Y~fmO+JYrhP0G.slO@#@&7;WU7fmY+{sK.:mY9lD+Prs+`:4+GlYST#@#@&i?n/drKx S;(f{rs[dZq9@#@&2UN,o!x^DkKx@#@&@#@&va[a:a[a::[aa[:a[aa[::a[a@#@&jE8~V+OSmUo!lLndk/O@#@&B:a[:[a:[a[aa[a[:a[a:a[a:@#@&?+D~0kW'Un.\DcZ.+COr8L^YvJj^MkwOr	o sbs?zkY:r(L^Yr#@#@&U+O~K0W^[+M'0kG oY6WsNn.v?nD7nDcHC2alY4crVCxTE*#@#@&?YPKsbs+k'GsKV[nMR0bs+k@#@&wG.Pl1t~0~r	PGsbs+k@#@&7&0Pi/m/n`6dKR!YA6YxkrW	1C:`Wb*'JG)KrPK4nUP@#@&idd'WdKRL+D8lk+UCs+`Wb@#@&7dkx`ZCk+vS+6Yvd~8#bPLPJ/m/+v\k9`/B+b#@#@&id)w2sbmCYbGxvJJC	oECLSr/DE*')aw^kmmYbGxvJJl	o;CT+SbdYr#PL~E@!}wDkGx~-mV;+{EPLPW 	l:n~LPE@*r~LPd@#@&i2x9P&W@#@&1n6D@#@&jYPKok^+/{HGY4k	o@#@&jnDPG0KsNDxHKYtrUT@#@&q6~zw2^k1lYbW	cJdWLS\nsr#@*Z~K4+x,	.kD+dWLSrUPE2	;:DCONPsC	o;lTnkJ@#@&?YP6/Kx1KY4k	o@#@&AxN,jj~@#@&@#@&va[a[a:a::[a:a[:a[a::[aa:@#@&?;4,!YJmxTElT+vJl	ook^+b@#@&Ba[:a[aa[::a[a[a:a::[a:a[@#@&U+O~6/WxjD-+M ;DnmYr4N+1O`r?^DbwOr	oRwrV?XkOn:}4N+^YEb@#@&]+Gr:,lPha`!b@#@&0x?.7+.cHmwwmY4cJ^lUoJJ'~^lxTWk^+#@#@&(0,0kW 0rs+akkO/v0b~:t+U@#@&dj+D~6Dx6/KRra+	P+XYok^+cWBF~wCVk+#@#@&7ldk	+d'j2^kO`6.RM+C[mVVS#(Z.S6b@#@&76DcmVK/@#@&isGD,x~x,!P:GP`AW!U[`mSbxn/b@#@&d7/{PDb:cCdkxndvxb#@#@&idKK/{qxkYMc/BJxJ*@#@&7iq0,d@!@*JJ,)Hf,nK/@*F~)gf~nKd@!8!~)gfPsn6Yc/Bq*@!@*rBrPbgf,s+6Yc/BFb@!@*Jir~K4+x,@#@&did&0~qUdDDc/BEir#~P4+x~d{Sn0Dck~(	/DD`aWkS/BJIJBFbR8#@#@&7diq0,(d1!:DrmcJ0O`kSnK/Rq*#PP4x@#@&i7idr{q	Y`d+6O`k~KWkOqb*@#@&i7didq6~r@*_k,K4+U@#@&d7di7Cb'r@#@&dd77iInNbh,n./D\PmP:a`r#@#@&77id2	[P&0@#@&77dil::2`rb{2dmm2+5EGO`K.rs`\k9ck~KK/3F#*#@#@&did3x9P(W@#@&di3x9Pq6@#@&dg+XY@#@&7)awsk1CYbWUcr?Y.E*'CKs2@#@&3	N,q0@#@&&WPzw2VbmCObWxvESKoS-nVr#@*!~K4n	P	DbO+dWLJbx+~E;WsV^D+[,N0l!VD~VmxLEmon~kYDbUokP0K.~J,[,b2wsr1lOkKU`rfnWmEVOJmxLEmLsr^+r#@#@&?OP6/G'gWO4bxo@#@&2	NPUi$@#@&@#@&B:a::[a:a[:a[a::[aa::[a:a@#@&wEU1YbWx,2k^la+}EKYnckYD*@#@&Eaa[::a[a[a:a::[a:a[:a[a:@#@&dqW~kY.@!@*ErPP4+	P@#@&di3/1l2+5EGO'I2Vmm+vdODBJEJSJ':2,IJ*@#@&i2sd@#@&77A/^lan5EGD+{/YM@#@&72	N~q6@#@&3	NPw;x1YkKU@#@&@#@&A0wLAA==^#~@</SCRIPT>
