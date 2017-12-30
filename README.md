@@ -1,6 +1,6 @@
-# An WebMail Server Application Using ASP(VBScript)
+# WebMail Server Application for ASP using VBScript
 
-This is a WebMail Server Application for ASP written in VBScript.
+This is a WebMail server application for ASP written in VBScript.
 
 I got this application from http://www.iisworks.com, but the website has already not available.
 
