@@ -1,0 +1,278 @@
+;############################
+; Language file for Webmail (http://www.iisworks.com)
+; Add a ";" to comment (part of) a line.
+; 03/07 Danish - Contributed by Thorvald Aagaard
+;############################
+
+;### Language specific system settings
+0=ISO-8859-1 ;Charset for denne language
+1=1030 ;LCID
+192=Ind, Slettede emner, Sendte emner, Kladder ;### Built-in folder names. Do not change order!
+196=År, Måneder, Uger, Dage, Timer, Minutter ;### Names for timeperiods
+
+;### Login page
+2=Bruger
+3=Kodeord
+4=Gem brugernavn
+5=Log ind
+6=Tilmeld
+7=Send kodeord
+8=Sprog
+9=Gem dit brugernavn i en cookie på denne computer
+10=Forkert brugernavn eller kodeord
+
+;### Listing
+11=Fra
+12=Emne
+13=Dato
+14=Alder
+15=Størrelse
+16=Til
+17=Ny meddelelse
+18=Afsender
+19=Dato sendt
+20=Sidste læsning
+21=Dato hentet
+22=Hentet fra IP
+23=CC Modtagere
+24=Høj prioritet
+25=Lav prioritet
+26=Meddelelser
+27=fundet
+28=Ulæst
+29=Første side
+30=forrige side
+31=Næste side
+32=Sidste side
+33=Månedlig båndbreddegrænse overskredet! Der er lukket for både afsendelse og modtagelse af mail.
+34=Opret ny meddelelse
+35=Flyt valgte meddelelser
+36=Er du sikker på du vil slette alle valgte emner fra Webmail?
+37=Slet valgte meddelelser
+38=Find tekst i meddelelser i denne folder
+39=Afbryd find 
+40=Marker valgte meddelelser som Læst
+41=Marker valgte meddelelser som Ulæst
+42=Send valgte meddelelser som vedhæftning pr. email
+43=Skift Autopreview mode
+44=Vis mine links
+45=Tag en note
+46=Vælg folder der skal vises
+47=Bruger konto konfiguration
+48=Manage WebMail brugere og grupper
+49=Webmail konto og mailbox information
+50=Log ud af Webmail
+51=Gå til hjemmeside
+52=Check for nye meddelelser
+53=(Fra)vælg alle meddelelser på denne side
+54=Vis sidste POP log
+
+;### View meddelelse
+55=Luk dette vindue
+56=Tilbage til listen
+57=Svar på denne email
+58=Svar til alle modtager af denne email
+59=Videresend denne email
+60=Udskriv denne email
+61=Vis meddelelse headers
+62=Åbn i en popup
+63=CC
+64=BCC
+65=Eksterne links i denne meddelelse er blokeret!
+66=Indlagte billeder kan give spammers bekræftelse på at din email er aktiv.\nEr du sikker på du stoler på denne afsender, og ønsker du at åbne den oprindelige meddelelse ?
+67=meddelelser kunne ikke hentes fordi begrænsningen i mailboxens størrelse er nået! Slet venligst nogle meddelelser og forsøg igen.
+68=Nye meddelelser hentet
+69=Sidst kontrolleret  
+70=(ingen nye meddelelser)
+
+;### Context menu
+71=Ny meddelelse
+72=Check email
+73=Flyt til
+74=Slet
+75=Slet fra webmail
+76=Marker som læst
+77=Marker som ulæst
+78=Er du sikker på du vil slette alle valgte meddelelser fra både Webmail og POP serveren?
+79=Slet fra server
+80=Er du sikker på du vil slette alle vedhæftninger fra valgte meddelelser?
+81=Slet vedhæftninger fra valgte meddelelser for at spare diskplads
+82=Slet vedhæftninger
+83=Opfrisk
+84=Fuld skærm
+85=Mailbox information
+86=Tilføj til adressebog
+
+87=Flyt til folder
+88=Afbryd
+89=Flyt
+90=Indtast nøgleord for søgning (Mindst 3 bogstaver):
+91=Vælg mindst et emne!
+92=Du må ikke sende post (SMPT er disabled)!
+
+;### Sending
+93=Send denne meddelelse
+94=Tilføj og fjerne vedhæftninger
+95=Gem denne meddelelse
+96=Skift til text edit mode
+97=Skift til HTML edit mode
+98=Addressebog
+99=Prioritet
+100=Tilføj modtager til adressebog
+101=Gem en kopi i Sendte emner
+102=For mange modtagere
+103=Tilladt
+104=Den størst tillate størrelse på en meddelelse er
+105=Der opstod en fejl ved afsendelse af din email!
+106=Din meddelelse blev afsendt med succes!
+
+;### Upload
+107=Upload vedhæftninger
+108=Forbudte filtyper
+109=Upload
+110=Nuværende vedhæftninger
+111=Blank alle
+112=Fejl ved upload af filer (upload er måske for stor)!
+113=Til rådighed
+114=Luk
+
+;### Config/info
+115=Konfiguration af 
+116=Modtagelse
+117=Kodeord
+118=Bekræft kodeord
+119=Email adresse
+120=POP konti
+121=Note: Åbning af denne mulighed vil slette nye meddelelser fra serveren!\nEr du sikker på du vil ændre dette valg?
+122=Slet post fra post server 
+123=Check om der er kommet ny post efter hver login og afsendelse
+124=Automatisk videresend til 
+125=Emner pr. side
+126=Fjern slettet post efter 
+127=Slet post fra server hvis ældre end 
+128=ADVARSEL: Markering af denne mulighed vil slette ældre meddelelser fra Post serveren permanent!\nVerificer dette valg, eller blank boksen for at disable denne funktion.
+129=Indboks filtre
+130=Slet list med tidligere slettede emner (forhindrer emner, som stadig er på serveren i at blive hentet igen)
+131=Slet historik
+132=Læs & Afsendelse
+133=Spil lyd når der kommer ny post
+134=Vis meddelelsesalder i stedet for dato
+135=Vis meddelelse auto-preview i listen
+136=Brug popup vinduer til afsendelse og læsning
+137=Gem advancerede funktioner
+138=Gem en kopi af sendte emner
+139=Gem ikke vedhæftninger, hvis mailen er større end
+140=Tegnsæt
+141=Egne foldere (en pr. linie)
+142=Signatur
+143=Gem
+144=Automatisk opfrisk
+145=Maksimalt antal POP konti er
+146=Dit kodeord er for kort! Mindste længde: 
+147=Kodeord er ikke ens!
+148=Mindste antal foldere der skal defineres (i brug)
+149=WebMail information
+150=Generel
+151=Brugernavn
+152=NT Bruger
+153=Log ind tid
+154=Email sidst kontrolleret
+155=Antal logins
+156=Forrige login
+157=Forrige IP
+158=Maximum meddelelse size
+159=Meddelelser gemt krypteret
+160=Afsendelse af email (SMTP) disabled
+162=Statistik
+163=Båndbredde
+164=Brugt i denne session
+165=Grænse pr. måned
+166=Brugt denne month
+167=Til rådighed
+168=Mailbox
+169=Maksimum mailbox størrelse
+170=I brug i øjeblikket
+171=Til rådighed
+172=Folder
+173=Meddelelser
+174=Størrelse
+175=Total
+176=Database totaler
+177=Antal meddelelser
+178=Total størrelse af meddelelser
+179=Antal brugere
+180=Antal grupper
+181=Active brugere
+182=Sidste POP log
+183=Hjem
+184=Manual
+185=Tilbage
+
+;### Subscribe
+186=Tilmeld
+187=Brugernavn
+188=Emailadresse
+189=Et start kodeord vil blive sendt til den emailadresse du indtaster. Hvis du ikke bruger kontoen inden for 3 dage, vil den blive slettet. Dit kodeord og POP konto informationen vil blive gemt krypteret i databasen.
+190=Dit kodeord er sendt til dig pr. email.
+191=Ingen valide emailadresser fundet for denne konto!
+
+193=Høj
+194=Lav
+195=Format: Email, POPServer, Konto, Kodeord
+
+'### My URL's, Notes, book
+197=Mine URL'er
+198=Ingen elementer endnu!
+199=Tilføj og fjern email-adresser og kategorier
+200=Ændre
+201=Et element pr. linie. Eksempel: URLNavn, www.domain.com
+202=Sorter listen når den gemmes
+203=Tilføj ny kategori
+204=Tilføj
+205=Er du sikker på du vil slette dette emne?
+206=Slet dette emne
+207=Slet
+208=Editer Mine URL'er
+
+209=Tag en note
+210=Note
+211=Tilføj ny note
+
+213=Adressebog
+214=Kategori
+215=Hold CTRL trykket ned for at vælge flere emner
+216=Tilføj og fjern email-adresser og kategorier
+217=Vælg alle
+218=Editer adressebog
+219=Et emne pr. linie. F. Eks.: ""Mit navn"" &lt;me@domain.com&gt;
+
+220=Denne email-adresse kan ikke godkendes!
+221=Dette brugernavn er allerede brugt, vælg et andet navn.
+222=Fejl ved oprettelse af bruger konto!
+223=Webmail log ind information
+224=Der er opstået en fejl i forbindelse med afsendelse af email.
+225=Konto ikke fundet!
+
+'### Inbox filters
+226=Indboks filtre
+227=Header
+228=Alle nye meddelelser som overholder dette kriterie vil automatisk blive flyttet til den valgte folder. Brug en kommaadskilt liste for at bruge flere termer i indholdsfeltet (Enhver af termerne vil blive checket). Lad indholdfeltet være blankt for at fjerne et filter. F. Eks: Porn, Viagra, Free money
+229=Hvis
+230=Indeholder
+231=Så flyt til
+232=Tilføj filter
+233=NOTE: Filtre vil ikke udført på meddelelser fra afsendere i din adressebog.
+234=Meddelelse
+
+235= ==== Original message ====
+236=Delete all messages
+237=ATTENTION: Are you sure you want to delete all messages in this folder?
+
+238=Move all messages
+239=Truncated message
+240=This message was downloaded partially. Click to download the rest.
+
+241=Find messages
+242=Entire message (slow)
+243=Search for
+244=Find

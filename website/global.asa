@@ -1,0 +1,378 @@
+<SCRIPT LANGUAGE="VBScript" RUNAT="Server">
+
+'########################
+Sub Application_OnStart
+'########################
+Application.Lock
+'############################################################################################
+' This section contains important WM settings. You can edit them to fit your needs.
+' Lines with an apostophe ( ' ) in front of them are commented out and therefore inactive. Uncomment them if necessary.
+'############################################################################################
+
+'############################################################################################
+'###### System settings ###### 
+'############################################################################################
+Application("DBConnection")="DBQ=" & server.mappath("database/webmail.mdb") & ";Driver={Microsoft Access Driver (*.mdb)}" '### Database connection string.
+'Application("DBConnection")="DSN=WM"
+'Application("IsAccessDatabase")=True '### Date handling is different for SQL/Access. If not defined WM will try to auto-detect 
+Application("Debugging")=True '### If true: All error messages will be shown and script processing is stopped when an error occurs (Normally debugging should be disabled)
+Application("LogFile")=Server.Mappath("webmail.log")
+Application("LogLevel")=2 '### Set WM log level: 0=Nothing, 1=Normal, 2=High, 3=Debug
+Application("MailRoot")=Server.Mappath("Mailboxes") & "\" '### Base path where all mailfolders are located (make sure to add a trailing backslash)
+Application("MaxRefreshTime")=8 '### Time in hours before auto-refresh of the users inbox is disabled (prevent endless refreshing of clients.)
+Application("AllowFullSearch")=True '### Allow users to do a full search (file based). If not, only Sender, Subject and Recipients fields are searched.
+Application("ReadBytesForSearch")=64*1024 '### Defines the blocksize that is read from the message file for searching. Most relevant text will be in the first part of a message.
+Application("MaxSearchMessages")=1000 '### Maximum number of messages to search on Find actions to limit server load (Default: empty=unlimited)
+Application("HiliteSearchresults")=True '### Highlights search results in the resulting message
+Application("SessionTimeout")=30 '### Session timeout in minutes (idle time before user session will be ended by IIS)
+Application("ComposeSessionTimeout")=120 '### Session timeout in minutes for "Compose email" page (to prevent time out while a user is still typing a message)
+Application("ScriptTimeout")=300 '### Time scripts are allowed to run before they time out (seconds)
+'Application("SelectLanguageOnLoginPage")=True '### Show the language selectbox on the login page.
+Application("DefaultLanguageFile")="English.dat" '### Default language file to use.
+Application("DefaultLCID")=2048 '### The LCID setting used to convert dates to the system setting (regardless of client session LCID). System default=2048, US=1033. See http://www.microsoft.com/globaldev/reference/lcid-all.mspx
+
+'###### NT Integration and security #########################################################################
+' Anonymous access for the virtual directory needs to be revoked in IIS to use this feature. 
+' To restrict access to FM you can apply proper NTFS permissions to login.asp (or the entire FM folder). Login as Domain\Username
+' Make sure that FM accounts exist for each NT User, or set AutoCreateNTUsers=True to create them automatically.
+'######
+'Application("UseNTAuthentication")=True '### Use integrated NT authentication (if Anonymous is disabled in IIS). This logs in NT validated users automatically. 
+Application("AutoCreateNTUsers")=True '### Auto-create non existing authenticated users if NT authentication is enabled (with default values for database fields).
+Application("AllowedIP")="" '### Comma delimited list of allowed IP numbers/ranges. Example: "192.*,10.0.0.*" 
+Application("DeniedIP")="" '### Comma delimited list of denied IP numbers/ranges (this setting overrides AllowedIP). Example: "192.*,10.0.0.*" 
+
+'############################################################################################
+'### Webmail settings
+'############################################################################################
+'Application("HomeLink")="/" '### If defined: show a home button linked to this page
+Application("UseContextMenu")=True '### Use right-click context menu of main WM functions (IE5+ only)
+Application("PageBGColor")="FFFFFF" '### Background color for pages
+Application("TableHeaderColor")="666688" '### Background color of table headers
+Application("OpenAttachInPopup")=True '### Open attachments in a popup window
+Application("PreviewColor")="444480" '### Color of preview text
+Application("ShowMessageInfo")=True '### Show message info (tooltip on the message icon)
+Application("SoundFilename")="notify.wav" '### Name of the sound file that will be played when new mail is received (if enabled). Must be present in the WM folder.
+Application("FixInvalidDates")=True '### Set the message date to the current date/time if it is invalid (Older than 30 years, or in the future)
+Application("AttachRemovedInfo")="[Files removed]" '### String that will be added to the Subject when attachments are removed from messages
+Application("UseTextBody")=True '### Use text version of a HTML message for reply (if present)
+Application("MakeLinksInText")=True '### Convert web links in plain text messages and convert them to clickable HTML-style links
+Application("AllowPreview")=True '### Allow users to use a message preview (First 255 chars of message are stored encrypted in the database). 
+Application("AllowAutoRefresh")=True '### Allow users to use auto-refresh (automatically retrieve email every n minutes)
+Application("AllowInboxFilters")=True '### Allow users to define inbox filters
+Application("IgnoreKnownSenders")=True '### Wwhen applying the inbox filters: ignore emails from senders that are in the address book
+'############################################################################################
+
+''############################################################################################
+'### Mail & subscription settings
+'### Make sure that relaying is allowed from the machine where webmail runs, or use SMTPAuthentication
+'### If a textfile "Disclaimer.dat" exists, it will be appended to all outgoing messages.
+'############################################################################################
+'Application("AllowSubscriptions")=True '### Allow all users to subscribe to Webmail. An initial pass will be sent to them to confirm the subscription.
+Application("SMTPMailServer")= "Localhost" '### SMTP Mailserver to be used to send email
+Application("SMTPPort")=25 '### SMTP port, default=25
+Application("UseSMTPAuthentication")=False '### Set to True if the mailserver requires SMTP Authentication
+Application("SMTPAccount")= "test" '### SMTP Authentication account name (only used if UseSMTPAuthentication=True)
+Application("SMTPPass")= "test" '### SMTP Authentication account password (only used if UseSMTPAuthentication=True)
+Application("PopTimeout")= 5000 '### POP timeout (ms)
+Application("DefaultGroupID")=2 '### Defines default group membership for new subscriptions (set this value to the GroupID of the default group)
+Application("FeedBackEmail")= "no-reply@yourdomain.com" '### Reply=to Email address used to send password
+Application("ServiceURL")= "http://www.iisworks.com/webmail" '### Link mentioned in the email sent to new users
+Application("AutoMaintenance")=True '### Perform automatic maintenance on the database if AllowSubscriptions=True (never used for n days). Make sure the time on the server is OK!
+'Application("DisableAccounts")=True '### Disable unused accounts instead of removing them (if AutoMaintenance=True)
+Application("CleanUpAfterDays")=90 '### Defines after how many days cleanup of inactive accounts should be performed
+Application("AllowedDomains")="" '### If defined: only these email addresses/domains are allowed to subscribe to the service and be used in the POP account list (Comma delimited list, for example:"dom1.org,dom2.com")
+Application("DeniedDomains")="hotmail.com,yahoo.com" '### If defined: email addresses in these domains are rejected for subscriptions and in POP account list (Comma delimited)
+
+'###### IMPORTANT! #########################################################################
+' This 16 byte key is used for encryption of passwords, POP account info and messages of all WM users of this installation.
+' 1) Only change the EncryptionKey before any users are present. 
+' 2) Store a copy of the key in a safe place! 
+' 3) If you change it when accounts have already been created information *will* be lost!
+' 4) When upgrading WM: don't forget to copy back your own old key here!
+'###### IMPORTANT! #########################################################################
+Application("EncryptionKey")="èäÌ¼Y¢¡:§È°z‘;÷§"
+
+'############################################################################################
+' End User settings
+'############################################################################################
+
+'**Start Encode**
+Application("MaxDeletionHistoryEntries")=500 '### Number of message ID's that are saved when deleting messages so that they will not be retrieved on next mailcheck, even if they are still on the server
+Application("Version")="3.1i"
+Application("WMAppIsInitialized")=True
+Application("NumLangEntries")=238 '### Maximum index of entries in the language file (UBound of array) to validate language files
+
+'### Is Database SQL or Access? (Different DateDif handling in AutoMaintenance) ###
+If Application("IsAccessDatabase")="" AND Instr(1,Application("DBConnection"),".mdb",1)>0 Then Application("IsAccessDatabase")=True 
+
+Application.UnLock
+GetLanguageList
+GetLanguage Application("DefaultLanguageFile")
+End Sub
+
+'########################
+Sub Application_OnEnd
+'########################
+End Sub
+
+'########################
+Sub Session_OnStart
+'########################
+If Request.ServerVariables("HTTP_X_FORWARDED_FOR")<>"" Then
+	Session("Proxy")="Proxy: " & Request.ServerVariables("HTTP_VIA") & VbTab & Request.ServerVariables("REMOTE_ADDR")
+	Session("IP")=Request.ServerVariables("HTTP_X_FORWARDED_FOR")
+Else
+	Session("IP")=Request.ServerVariables("REMOTE_ADDR")
+End If
+If Application("UseNTAuthentication") Then Session("NTUser")=Request.ServerVariables("AUTH_USER")
+
+'### Clean up accounts that were created more than n days ago, but never used
+If Application("AutoMaintenance") AND Application("AllowSubscriptions") AND DateDiff("h", Application("LastMaint"),Now)>12 Then DatabaseMaintenance
+
+'### Set app language file as default
+Session("Str")=Application("Str") 
+'Session.LCID=1031 '1033=US
+End Sub
+
+'########################
+Sub Session_OnEnd
+'########################
+'On error resume next
+If Session("IsLoggedin") Then
+	Application("Activeusers")=Application("Activeusers")-1
+	WriteLogLine "Logout"
+	Set Conn=Server.CreateObject("ADODB.Connection")
+	Conn.Mode = 3
+	Conn.Open Application("DBConnection")
+	'SQL= "UPDATE Accounts SET NumLogins=" & Session("NumLogins") & ", DeletionHistory='" & FormatSQL(Session("DeletionHistory")) & "', BandwidthUsed=" & Round(Session("Bandwidth")) & ", [Note]='" & FormatSQL(Session("Note")) & "', AddressBook='" & FormatSQL(Session("AddressBook")) & "', URLList='" & FormatSQL(Session("URLList")) & "', FilterList='" & FormatSQL(Session("FilterList")) & "', LastLogin='" & ConvDate(Session("LoginTime")) & "', LastIP='" & Session("IP") & "' WHERE [UserID] =" & Session("UserID") & ";"
+	SQL= "UPDATE Accounts SET NumLogins=" & Session("NumLogins") & ", DeletionHistory='" & FormatSQL(Session("DeletionHistory")) & "', BandwidthUsed=BandwidthUsed + " & Round(Session("Bandwidth")) & ", FilterList='" & FormatSQL(Session("FilterList")) & "', LastLogin='" & ConvDate(Session("LoginTime")) & "', LastIP='" & Session("IP") & "' WHERE [UserID] =" & Session("UserID") & ";"
+	'writelogline sql
+	Conn.execute(SQL)
+	Conn.Close
+	Set Conn=Nothing
+
+	Set fso = Server.CreateObject("Scripting.FileSystemObject")
+	ClearTemp Session("TempFolder")
+	Set fso = Nothing
+End If
+End Sub
+
+'########################
+SUB ClearTemp(strSourceDir)
+'########################
+On Error Resume Next
+Set fso = Server.CreateObject("Scripting.FileSystemObject")
+Set oFolder = fso.GetFolder(strSourceDir)
+Set oFiles = oFolder.Files
+For Each Item in oFiles
+	Item.Delete True
+Next
+Set fldr = oFolder.SubFolders
+For Each Item in fldr
+	Item.Delete True
+Next
+End Sub
+
+'########################
+SUB WriteLogLine(msg)
+'########################
+Set fso = Server.CreateObject("Scripting.FileSystemObject")
+Set fw=fso.openTextFile(Application("LogFile"),8,true)
+fw.writeline Now & VbTab & Session("IP") & VbTab & Session("User") & VbTab & Msg
+Set fso = Nothing
+End SUB
+
+'########################
+Function CreatePath(sPath)
+'########################
+Set fso = Server.CreateObject("Scripting.FileSystemObject")
+If fso.folderexists(sPath) Then
+	CreatePath=True
+ElseIf Instr(sPath,"\")>0 Then
+	pos=Instr(3,sPath,"\",1)
+	aTmp=Split(Mid(sPath,pos+1),"\")
+	sNewPath=Left(sPath,pos-1)
+	For n = 0 to Ubound(aTmp)
+		On Error resume next 'Ignore permission problems on higher levels
+		sNewPath = sNewPath & "\" & aTmp(n)
+		If aTmp(n)<>"" AND NOT fso.FolderExists(sNewPath) Then fso.CreateFolder sNewPath
+	Next
+	If fso.FolderExists(sPath) Then CreatePath=True Else CreatePath=False
+End If
+Set fso = Nothing
+End Function
+
+'########################
+Sub DatabaseMaintenance
+'########################
+	If Application("Debugging")=False Then On Error resume next
+	Application("LastMaint")=Now
+	
+	'### Open connection
+	Set Conn=Server.CreateObject("ADODB.Connection")
+	Set RS=Server.CreateObject("ADODB.RecordSet")
+	Conn.Mode = 3
+	Conn.ConnectionTimeout=20
+	Conn.Open Application("DBConnection")
+	
+	'### Clean up all accounts that were created more than n days ago, but never used
+	If Application("IsAccessDatabase") Then
+		SQL= "Delete From Accounts WHERE Datediff('d',DateCreated,Now())>3 AND LastLogin Is Null"
+	Else
+		SQL= "Delete From Accounts WHERE Datediff(d,DateCreated,Getdate())>3 AND LastLogin Is Null"
+	End If	
+	If Application("LogLevel")>0 Then WriteLogLine "Database maintenance - Deleting unused accounts." '& SQL
+	Conn.Execute(SQL)
+
+	'### Clean up all accounts that have not been used for n days
+	If Application("IsAccessDatabase") Then
+		SQL= "Select [User], IsDisabled, LastLogin From Accounts WHERE Datediff('d',LastLogin,Now())>" & Application("CleanUpAfterDays") & " AND LastLogin Is NOT Null"
+	Else
+		SQL= "Select [User], IsDisabled, LastLogin From Accounts WHERE Datediff(d,LastLogin,Getdate())>" & Application("CleanUpAfterDays") & " AND LastLogin Is NOT Null"
+	End If	
+	RS.Open SQL,Conn ,3,3
+	'Response.write SQL
+	While NOT RS.EOF
+		User=RS("User")
+		'### Only disable 
+		If Application("DisableAccounts") Then
+			If RS("IsDisabled")=False Then
+				If Application("LogLevel")>0 Then WriteLogLine "Database maintenance - Disabling inactive user: " & User & " (Last login: "& RS("LastLogin") & ")"
+				RS("IsDisabled")=True
+				RS.Update
+			End If
+		'### Delete user + mailfolder
+		Else
+			If Application("LogLevel")>0 Then WriteLogLine "Database maintenance - Deleting inactive user: " & User & " (Last login: "& RS("LastLogin") & ")"
+			MailRoot=Application("MailRoot") & RemoveIllegalChars(User)
+			Set fso = Server.CreateObject("Scripting.FileSystemObject")
+			If fso.folderexists(MailRoot) Then fso.deletefolder MailRoot, True
+			RS.Delete
+		End If
+		RS.MoveNext
+	Wend
+	
+	'### Close connection
+	RS.Close
+	Set RS=Nothing
+	Conn.Close
+	Set Conn=Nothing
+End SUB
+
+'########################
+Function FormatSQL(str)
+'########################
+FormatSQL=Replace(Str,"'","''")
+End Function
+
+'########################
+Function EncryptText(strText,strKey)
+'########################
+If strText<>"" Then
+	KeyLen=Len(strKey)
+	ReDim aKey(KeyLen)
+	For i=1 To KeyLen
+		aKey(i)=Asc(Mid(strKey,i, 1))
+	Next
+	For i=1 To Len(strText)
+		If j=KeyLen Then j=1 Else j=j+1
+	strEnc = strEnc & Chr(Asc(Mid(strText, i, 1)) XOR aKey(j))
+	Next
+	EncryptText = strEnc
+End If
+End Function
+
+'########################
+Function ObjectExists(oClass)
+'########################
+	On Error Resume Next
+	Set obj=Server.CreateObject(oClass)
+	If Err Then ObjectExists=False Else ObjectExists=True
+	Set Obj=Nothing
+End Function
+
+'########################
+Function RemoveIllegalChars(str)
+'########################
+	str=Replace(str,"/","_")
+	str=Replace(str,"\","_")
+	str=Replace(str,"?","_")
+	str=Replace(str,"*","_")
+	str=Replace(str,">","_")
+	str=Replace(str,"<","_")
+	str=Replace(str,"|","_")
+	str=Replace(str,":","_")
+	str=Replace(str,"'","_")
+	RemoveIllegalChars=Str
+End Function
+
+'########################
+Function ConvDate(TheDate)
+'########################
+	OldLCID=Session.LCID
+	Session.LCID=Application("DefaultLCID") 'System default Date/time format
+	ConvDate=FormatDateTime(TheDate,0)
+	Session.LCID=OldLCID
+End Function
+
+'########################
+Sub GetLanguageList
+'########################
+Set fso=Server.CreateObject("Scripting.FileSystemObject")
+Set ofolder=fso.getfolder(Server.Mappath("lang"))
+Set oFiles=oFolder.files
+For each f in oFiles
+	If UCase(fso.GetExtensionName(f))="DAT" Then 
+		s=fso.getbasename(f)
+		s=UCase(Left(s,1)) & LCase(Mid(s,2))
+		Application("LanguageList")=Application("LanguageList") & "<Option value=" & f.name & ">" & s
+	End If
+Next
+Set oFiles=Nothing
+Set ofolder=Nothing
+If Application("LogLevel")>0 Then WriteLogLine "Enumerated languages"
+Set fso=Nothing
+End SUB
+
+'########################
+Sub GetLanguage(LangFile)
+'########################
+Set fso=Server.CreateObject("Scripting.FileSystemObject")
+ReDim aTmp(0)
+f=Server.Mappath("lang/"& langfile)
+If fso.fileexists(f) Then
+	Set fr=fso.OpenTextFile(f,1,False)
+	aLines=Split(fr.readall,VbCrLf)
+	fr.close
+	For n = 0 To UBound(aLines)
+		s=Trim(aLines(n))
+		Pos=Instr(s,"=")
+		If s<>"" AND Pos>1 AND Pos<10 AND left(s,1)<>"'" AND left(s,1)<>";" Then 
+			If Instr(s,";") Then s=Left(s,Instr(pos,s,";",1)-1)
+			If IsNumeric(Left(s,Pos-1)) Then
+				i=Int(Left(s,Pos-1))
+					If i>Hi Then
+					Hi=i
+					Redim Preserve aTmp(i)
+				End If
+				aTmp(i)=EscapeQuote(Trim(Mid(s,Pos+1)))
+			End If
+		End If
+	Next
+	Application("Str")=aTmp
+End If
+If Application("LogLevel")>0 Then WriteLogLine "Collected default language strings for " & Application("DefaultLanguageFile")
+Set fso=Nothing
+End SUB
+
+'########################
+Function EscapeQuote(str)
+'########################
+	If str<>"" Then 
+		EscapeQuote=Replace(str,"'","&#39;")
+	Else
+		EscapeQuote=str
+	End If
+End Function
+
+</SCRIPT>

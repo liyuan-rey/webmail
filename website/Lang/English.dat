@@ -1,0 +1,279 @@
+;############################
+; Language file for Webmail (http://www.iisworks.com)
+; Add a ";" to comment (part of) a line.
+; 03/08 English - Contributed by JH
+;############################
+
+;### Language specific system settings
+0=ISO-8859-1 ;Charset for this language
+1=1033 ;LCID
+192=Inbox, Deleted items, Sent items, Drafts ;### Built-in folder names. Do not change order!
+196=Years, Months, Weeks, Days, Hours, Minutes ;### Names for timeperiods
+
+;### Login page
+2=User
+3=Password
+4=Save user name
+5=Login
+6=Subscribe
+7=Resend pass
+8=Language
+9=Save your user name in a cookie on this computer
+10=Invalid user name or password!
+
+;### Listing
+11=From
+12=Subject
+13=Date
+14=Age
+15=Size
+16=To
+17=New messages
+18=Sender
+19=Date sent
+20=Last read
+21=Date retrieved
+22=Retrieved from IP
+23=CC Recipients
+24=High priority
+25=Low priority
+26=Messages
+27=found
+28=Unread
+29=First page
+30=previous page
+31=Next page
+32=Last page
+33=Monthly bandwidth limit exceeded! Sending and receiving is disabled.
+34=Compose a new email
+35=Move selected messages
+36=Are you sure you want to delete all selected items from Webmail?
+37=Delete selected messages
+38=Find messages in this folder
+39=Cancel find mode
+40=Mark selected messages as Read
+41=Mark selected messages as Unread
+42=Send selected messages as attachments by email
+43=Toggle Autopreview mode
+44=Show my links
+45=Take a note
+46=Select folder to view
+47=User account configuration
+48=Manage WebMail users and groups
+49=Webmail account and mailbox info
+50=Logout of Webmail
+51=Go to home page
+52=Check for new email
+53=(De)select all messages on this page
+54=Show last POP log
+
+;### View message
+55=Close this window
+56=Back to list
+57=Reply to this email
+58=Reply to all recipients of this email
+59=Forward this email
+60=Print this email
+61=Show message headers
+62=Open in a popup
+63=CC
+64=BCC
+65=External links in this message were blocked!
+66=Embedded images may give spammers confirmation that your email address is active.\nAre you sure you can trust this sender, and do you want to open the original message?
+67=messages could not be retrieved because the mailbox size limit was reached! Please delete some messages and try again.
+68=New messages retrieved
+69=Last checked on 
+70=(no new messages)
+
+;### Context menu
+71=New message
+72=Check email
+73=Move to
+74=Delete
+75=Delete from webmail
+76=Mark as read
+77=Mark as unread
+78=Are you sure you want to delete all selected messages both from Webmail and the POP server?
+79=Delete from server
+80=Are you sure you want to delete all attachments from the selected messages?
+81=Remove attachments from selected messages to save disk space
+82=Delete attachments
+83=Refresh
+84=Full screen
+85=Mailbox info
+86=Add to address book
+
+87=Move to folder
+88=Cancel
+89=Move
+90=Enter keywords to search for (at least 3 characters):
+91=Please select at least one item!
+92=You are not allowed to send email (SMPT is disabled)!
+
+;### Sending
+93=Send this message
+94=Add and remove attachments
+95=Save this message
+96=Switch to text edit mode
+97=Switch to HTML edit mode
+98=Address book
+99=Priority
+100=Add recipients to address book
+101=Save a copy in Sent items
+102=Too many recipients
+103=Allowed
+104=The maximum allowed message size is
+105=An error occurred while sending your email!
+106=Your message was sent successfully!
+
+;### Upload
+107=Upload attachments
+108=Forbidden file types
+109=Upload
+110=Current attachments
+111=Clear all
+112=Error uploading files (upload may be too big)!
+113=Available
+114=Close
+
+;### Config/info
+115=Configuration of 
+116=Retrieving
+117=Password
+118=Confirm password
+119=Email address
+120=POP accounts
+121=Note: Enabling this option will delete new messages from the server!\nAre you sure you want to change this option?
+122=Delete mail from source server 
+123=Check for new mail after login and sending
+124=Auto-forward to
+125=Items per page
+126=Remove deleted mail after
+127=Delete mail from server if older than
+128=WARNING: Setting this option will permanently delete older messages from the POP server!\nVerify the entry, or clear the box to disable this function.
+129=Inbox filters
+130=Clear the previously deleted items list (prevents items still on the server from being retrieved again)
+131=Clear history
+132=Reading & Sending
+133=Play sound when new mail arrives
+134=Show message age instead of date
+135=Display message auto-preview in list
+136=Use popup windows for sending and reading
+137=Hide advanced functions
+138=Save a copy of sent items
+139=Don't save attachments if mail is larger than
+140=Character set
+141=Custom folders (one per line)
+142=Signature
+143=Save
+144=Auto-refresh
+145=Maximum number of POP accounts is
+146=Your password is too short! Minimum length: 
+147=Passwords do not match!
+148=Minimum number of folders to define (in use)
+149=WebMail info
+150=General
+151=User name
+152=NT User
+153=Login time
+154=Email last checked
+155=Number of logins
+156=Previous login
+157=Previous IP
+158=Maximum message size
+159=Messages stored encrypted
+160=Sending of email (SMTP) disabled
+162=Statistics
+163=Bandwidth
+164=Used this session
+165=Limit per month
+166=Used this month
+167=Available
+168=Mailbox
+169=Maximum mailbox size
+170=Currently in use
+171=Available
+172=Folder
+173=Messages
+174=Size
+175=Total
+176=Database totals
+177=Number of messages
+178=Total size of messages
+179=Number of users
+180=Number of groups
+181=Active users
+182=Last POP log
+183=Home
+184=Manual
+185=Back
+
+;### Subscribe
+186=Subscribe
+187=User name
+188=Email address
+189=An initial password will be sent to the email address you enter. If you do not use the account within 3 days, it will be deleted. Your password and POP account information will be stored in the database encrypted.
+190=Your password has been sent to you by email.
+191=No valid email address found for this account!
+
+193=High
+194=Low
+195=Format: Email, POPServer, Account, Password
+
+'### My URL's, Notes, book
+197=My URL's
+198=No entries yet!
+199=Add and remove links and categories
+200=Modify
+201=One entry per line. Example: URLName, www.domain.com
+202=Sort list when saved
+203=Add new category
+204=Add
+205=Are you sure you want to delete this item?
+206=Delete this item
+207=Del
+208=Edit My URL's
+
+209=Take a note
+210=Note
+211=Add new note
+
+213=Address book
+214=Category
+215=Keep CTRL pressed to select multiple entries
+216=Add and remove email addresses and categories
+217=Select all
+218=Edit address book
+219=One entry per line. Example: "My name" <me@domain.com>
+
+220=This email address/domain is not accepted!
+221=This user name is already in use, choose another name.
+222=Error creating new user account!
+223=Webmail login information
+224=An error occurred while sending your email.
+225=Account not found!
+
+'### Inbox filters
+226=Inbox filters
+227=Header
+228=All new messages that meet the criteria will automatically be moved to the selected folder. Use a comma delimited list to use multiple terms in the Contains field (any of those terms will be matched). Leave the Contains field empty to remove a filter. Example: Porn, Viagra, Free money
+229=If
+230=Contains
+231=Then move to
+232=Add filter
+233=NOTE: Filters will not be applied to messages from senders in your address book.
+234=Message
+
+235= ==== Original message ====
+236=Delete all messages
+237=ATTENTION: Are you sure you want to delete all messages in this folder?
+
+238=Move all messages
+
+239=Truncated message
+240=This message was downloaded partially. Click to download the rest.
+
+241=Find messages
+242=Entire message (slow)
+243=Search for
+244=Find

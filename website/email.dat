@@ -1,0 +1,16 @@
+Dear %user%,
+
+This is your login information for our WebMail service.
+You can find it on %URL%.
+
+Login information:
+User name: %user%
+Password: %pass%
+
+Notes for new subscribers:
+- If you do not login within 3 days, your account will be deleted.
+- Use the configuration page to change your password and add POP accounts
+
+Regards,
+Webmaster
+
